@@ -1,0 +1,2 @@
+Flask  # Or your desired Flask version.  Pinning is good practice!
+gunicorn==20.1.0 # Add gunicorn explicitly
