@@ -37,7 +37,7 @@ on:
 env:
   PROJECT_ID: 'red-abstraction-446113-u1' # TODO: update to your Google Cloud project ID
   GAR_NAME: 'grunaction'
-  GAR_REGION: 'us-central1' # TODO: update to your region
+  GAR_LOCATION: 'us-central1' # TODO: update to your region
   SERVICE: 'my-flask-app' # TODO: update to your service name
   REGION: 'us-central1'
   WORKLOAD_IDENTITY_PROVIDER: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider' # TODO: update to your workload identity provider
@@ -72,7 +72,7 @@ jobs:
          gcloud auth configure-docker "${{ env.REGION }}-docker.pkg.dev"
       - name: 'Build and Push Container'
         run: |-
-          DOCKER_TAG="${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{env.GAR_NAME}}/${{env.SERVICE}}:${{ github.sha }}"
+          DOCKER_TAG="$${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{env.GAR_NAME}}/${{env.SERVICE}}:${{ github.sha }}"
           docker build --tag "${DOCKER_TAG}" .
           docker push "${DOCKER_TAG}"
 # END - Docker auth and build
